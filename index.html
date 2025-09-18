@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu OCR → Dishes (Text-Only Parser)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tesseract.js OCR (CDN) -->
+  <script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
+  <style>
+    :root { --ink:#111; --muted:#666; --card:#fafafa; }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 24px; color: var(--ink); }
+    h1 { margin: 0 0 12px; }
+    .grid { display: grid; gap: 20px; grid-template-columns: 1.2fr 1fr; align-items: start; }
+    .card { background: var(--card); border: 1px solid #e8e8e8; border-radius: 10px; padding: 14px; }
+    .btnrow { display:flex; gap:10px; align-items:center; flex-wrap: wrap; }
+    .btn { padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px; background:#fff; cursor:pointer; }
+    .btn:disabled { opacity:.6; cursor: not-allowed; }
+    .hint { color: var(--muted); font-size: .9rem; }
+    textarea, pre { width: 100%; min-height: 220px; background:#fff; border:1px solid #eee; border-radius:8px; padding:12px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+    img { max-width: 100%; border-radius: 10px; border:1px solid #eee; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:999px; background:#eef8f0; border:1px solid #d5efe0; margin-left:8px; font-size:.85rem; }
+    #toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #111; color:#fff; padding:10px 14px; border-radius:10px; opacity:0; transition:.2s; max-width: 92vw; }
+    #toast.show { opacity: .95; }
+    ul { margin: 8px 0 0 18px; padding:0; }
+    li { margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <h1>Menu OCR → Dishes <span class="pill">Text-only parsing</span></h1>
+  <p class="hint">Upload a menu image (try your <code>menu_simple_v1.png</code>). We’ll ignore coordinates and parse the <b>raw OCR text</b> into structured dishes.</p>
+
+  <div class="btnrow" style="margin-bottom:10px">
+    <input id="file" type="file" accept="image/*" class="btn">
+    <button id="copyJson" class="btn" disabled>Copy JSON</button>
+    <span id="progress" class="hint"></span>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3 style="margin-top:0">Preview</h3>
+      <img id="preview" alt="Menu preview will appear here">
+      <div style="margin-top:10px">
+        <h3 style="margin:12px 0 8px">Parsed Dishes</h3>
+        <div id="dishesList" class="hint">No dishes yet.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">OCR Output (raw)</h3>
+      <pre id="ocrOut">No output yet.</pre>
+      <h3>Parsed JSON</h3>
+      <textarea id="jsonOut" readonly>{"dishes":[]}</textarea>
+      <p class="hint">Tip: this JSON is what you’ll use to link images or build click targets later.</p>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <!-- App logic -->
+  <script defer src="./app.js"></script>
+</body>
+</html>
