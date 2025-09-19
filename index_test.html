@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>K&E Menus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tesseract.js OCR (CDN) -->
+  <script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* minimal styles only for the line boxes + debug toggle;
+       keep the rest in your existing style.css */
+    #previewWrap { position: relative; display: inline-block; }
+    .hitbox { position: absolute; border: 2px solid rgba(0,0,0,.35); background: rgba(0,153,255,.12); border-radius: 4px; cursor: pointer; }
+    details.debug summary { cursor: pointer; margin: 12px 0 6px; }
+    details.debug pre { max-height: 40vh; overflow: auto; }
+  </style>
+</head>
+<body>
+  <!-- Splash -->
+  <div id="splash">K&E Menus</div>
+
+  <!-- Main Title -->
+  <h1 class="main-title">K&E Menus</h1>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" data-target="scan">Scan Menu</button>
+    <button class="tab" data-target="favorites">Favorites</button>
+    <button class="tab" data-target="history">History</button>
+  </div>
+
+  <!-- Scan tab -->
+  <div id="scan" class="tab-content active">
+    <div class="btnrow" style="margin-bottom:10px">
+      <input id="file" type="file" accept="image/*" class="btn">
+      <button id="copyJson" class="btn" disabled>Copy JSON</button>
+      <span id="progress" class="hint"></span>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3 style="margin-top:0">Preview</h3>
+        <div id="previewWrap">
+          <img id="preview" alt="Menu preview will appear here">
+        </div>
+
+        <div style="margin-top:10px">
+          <h3 style="margin:12px 0 8px">Parsed Dishes</h3>
+          <div id="dishesList" class="hint">No dishes yet.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0">OCR Output (raw)</h3>
+        <pre id="ocrOut">No output yet.</pre>
+
+        <h3>Parsed JSON</h3>
+        <textarea id="jsonOut" readonly>{"dishes":[]}</textarea>
+        <p class="hint">Tip: this JSON is what you’ll use to link images or build click targets later.</p>
+
+        <details class="debug">
+          <summary>Debug (per line)</summary>
+          <pre id="debugOut">No debug yet.</pre>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Favorites -->
+  <div id="favorites" class="tab-content">
+    <p class="hint">No favorites yet.</p>
+  </div>
+
+  <!-- History -->
+  <div id="history" class="tab-content">
+    <p class="hint">No history yet.</p>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast"></div>
+
+  <!-- App logic -->
+  <script defer src="./testApp.js"></script>
+</body>
+</html>
