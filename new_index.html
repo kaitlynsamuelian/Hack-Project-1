@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu OCR – Lines → JSON</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tesseract.js OCR (CDN) -->
+  <script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 24px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+    #previewWrap { position: relative; display: inline-block; }
+    #preview { max-width: 100%; display: block; border: 1px solid #ddd; border-radius: 8px; }
+    .hitbox { position: absolute; border: 2px solid rgba(0,0,0,.35); background: rgba(0,153,255,.12); cursor: pointer; border-radius: 4px; }
+    #log, #jsonOut, #debug { font-family: ui-monospace, Menlo, Consolas, monospace; white-space: pre-wrap; background:#fafafa; border:1px solid #eee; padding:12px; border-radius:8px; max-height:60vh; overflow:auto; }
+    .btn { padding: 10px 14px; border-radius: 8px; border: 1px solid #ddd; cursor: pointer; background:#fff; }
+    #progress { margin-left: 8px; font-size: 0.9em; color: #555; }
+    #toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: #111; color:#fff; padding:8px 12px; border-radius:8px; opacity:0; transition:.2s; }
+    #toast.show { opacity: .95; }
+    .pill { display:inline-block; padding:2px 8px; border-radius:999px; background:#eef8f0; border:1px solid #d5efe0; margin-left:8px; font-size:.85rem; }
+    .actions { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  </style>
+</head>
+<body>
+  <h1>Menu OCR – Step 3: Line Boxes <span class="pill">+ JSON parser</span></h1>
+  <p>Upload a menu. We enhance → OCR → group words into lines → draw one box per line. Then we parse the raw text into <b>dishes JSON</b>.</p>
+
+  <div class="actions">
+    <input id="file" type="file" accept="image/*" class="btn">
+    <button id="copyJson" class="btn" disabled>Copy JSON</button>
+    <button id="downloadJson" class="btn" disabled>Download JSON</button>
+    <span id="progress"></span>
+  </div>
+
+  <div class="row" style="margin-top:20px">
+    <div>
+      <h3>Preview + Line Boxes</h3>
+      <div id="previewWrap">
+        <img id="preview" alt="Menu preview">
+      </div>
+    </div>
+    <div>
+      <h3>OCR Output (raw)</h3>
+      <div id="log">No output yet.</div>
+      <h3 style="margin-top:16px">Parsed JSON</h3>
+      <div id="jsonOut">{ "dishes": [] }</div>
+      <h3 style="margin-top:16px">Debug (per line)</h3>
+      <div id="debug">No debug yet.</div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <!-- App logic -->
+  <script defer src="./newApp.js"></script>
+</body>
+</html>
