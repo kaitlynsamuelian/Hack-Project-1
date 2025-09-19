@@ -1,0 +1,245 @@
+:root {
+    --ink: #111;
+    --muted: #666;
+    --card: #fafafa;
+    --accent: #2d89ef;   /* blue accent for buttons/links */
+    --radius: 10px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  @font-face {
+    font-family: "Thinoo";
+    src: url("fonts/Thinoo-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: "Thinoo";
+    src: url("fonts/Thinoo-Bold.otf") format("opentype");
+    font-weight: bold;
+    font-style: normal;
+  }
+
+
+  body {
+    font-family: "Thinoo", system-ui, sans-serif;
+    margin: 24px;
+    color: var(--ink);
+    background: #f7f8fa;
+    line-height: 1.5;
+  }
+
+  .main-title {
+    text-align: center;
+  }
+  
+  
+  h1, h3 {
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  
+  h1 span.pill {
+    vertical-align: middle;
+  }
+  
+  .grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+  
+  .card {
+    background: var(--card);
+    border: 1px solid #e8e8e8;
+    border-radius: var(--radius);
+    padding: 14px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  }
+  
+  .btnrow {
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    padding: 10px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background:#fff;
+    cursor:pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s, transform 0.1s;
+  }
+  
+  .btn:hover:not(:disabled) {
+    background: #000;   /* black background */
+    color: #fff;        /* keep text white */
+    transform: translateY(-1px);
+  }
+  
+  
+  .btn:disabled {
+    opacity:.6;
+    cursor: not-allowed;
+  }
+  
+  .hint {
+    color: var(--muted);
+    font-size: .9rem;
+  }
+  
+  textarea, pre {
+    width: 100%;
+    min-height: 220px;
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:8px;
+    padding:12px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+  }
+  
+  img {
+    max-width: 100%;
+    border-radius: var(--radius);
+    border:1px solid #eee;
+    box-shadow: var(--shadow);
+  }
+  
+  .pill {
+    display:inline-block;
+    padding:2px 8px;
+    border-radius:999px;
+    background:#eef8f0;
+    border:1px solid #d5efe0;
+    margin-left:8px;
+    font-size:.85rem;
+  }
+  
+  #toast {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    color:#fff;
+    padding:10px 14px;
+    border-radius:var(--radius);
+    opacity:0;
+    transition: opacity .3s, transform .3s;
+    max-width: 92vw;
+  }
+  
+  #toast.show {
+    opacity: .95;
+    transform: translateX(-50%) translateY(-6px);
+  }
+  
+  ul {
+    margin: 8px 0 0 18px;
+    padding:0;
+  }
+  
+  li {
+    margin: 6px 0;
+    padding: 4px 0;
+    border-bottom: 1px dashed #eee;
+  }
+
+
+
+
+  /* Splash overlay */
+#splash {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 1s ease;
+  }
+  
+  /* Hidden state */
+  #splash.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* Optional: make content hidden under splash look nice */
+  #content {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+  
+
+
+
+
+  /* Tabs */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0;
+  }
+  
+  .tab {
+    background: none;
+    border: none;
+    font-family: "Thinoo", system-ui, sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 8px 0;
+    position: relative;
+    color: var(--ink);
+  }
+  
+  .tab.active {
+    font-weight: bold;
+  }
+  
+  .tab.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background: #000; /* underline color */
+  }
+  
+  .tab-content {
+    display: none;
+  }
+  
+  .tab-content.active {
+    display: block;
+  }
+  
+  
