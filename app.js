@@ -248,3 +248,37 @@ copyBtn.addEventListener('click', async () => {
     showToast('Copied (fallback)');
   }
 });
+
+
+
+
+
+
+
+// SPLASH PAGE
+// Splash fade-out effect
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.getElementById("splash").classList.add("hide");
+  }, 2000); // 2000 ms = 2 seconds
+});
+
+
+
+
+// ===== Tabs =====
+const tabs = document.querySelectorAll(".tab");
+const tabContents = document.querySelectorAll(".tab-content");
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    // Remove active from all tabs
+    tabs.forEach(t => t.classList.remove("active"));
+    tabContents.forEach(c => c.classList.remove("active"));
+
+    // Activate clicked tab + its content
+    tab.classList.add("active");
+    const targetId = tab.getAttribute("data-target");
+    document.getElementById(targetId).classList.add("active");
+  });
+});
